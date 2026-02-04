@@ -185,5 +185,30 @@
     </div>
     <script src="js/player.js"></script>
     <script src="js/welcome.js"></script>
+    <script>
+        // Fallback: show modal once on load (never reopen if closed)
+        (function() {
+            function ensureModalVisible() {
+                var modal = document.getElementById('welcomeModal');
+                if (!modal || modal.hasAttribute('data-closed') || modal.classList.contains('welcome-modal--closed')) return;
+                modal.classList.remove('welcome-modal--closed');
+                modal.style.display = 'flex';
+                modal.style.opacity = '1';
+                modal.style.visibility = 'visible';
+                modal.classList.remove('welcome-modal--hidden');
+            }
+            var done = false;
+            function runOnce() {
+                if (done) return;
+                done = true;
+                setTimeout(ensureModalVisible, 150);
+            }
+            if (document.readyState === 'complete') runOnce();
+            else {
+                window.addEventListener('load', runOnce);
+                document.addEventListener('DOMContentLoaded', runOnce);
+            }
+        })();
+    </script>
 </body>
 </html>

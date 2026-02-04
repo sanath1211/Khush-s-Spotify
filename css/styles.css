@@ -585,6 +585,11 @@ body {
     transition: opacity 0.4s ease, visibility 0.4s ease;
 }
 
+.welcome-modal--closed {
+    display: none !important;
+    pointer-events: none;
+}
+
 .welcome-modal--hidden {
     opacity: 0;
     visibility: hidden;

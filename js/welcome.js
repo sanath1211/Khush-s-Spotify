@@ -1,49 +1,89 @@
 (function () {
     'use strict';
 
-    var modal = document.getElementById('welcomeModal');
-    var closeBtn = document.getElementById('closeWelcomeModal');
-    var welcomeBtn = document.getElementById('welcomeBtn');
+    var modalClosed = false;
 
-    function closeModal() {
-        if (modal) {
-            modal.classList.add('welcome-modal--hidden');
-            setTimeout(function () {
-                modal.style.display = 'none';
-            }, 300);
+    function initWelcomeModal() {
+        var modal = document.getElementById('welcomeModal');
+        var closeBtn = document.getElementById('closeWelcomeModal');
+        var welcomeBtn = document.getElementById('welcomeBtn');
+
+        if (!modal) {
+            console.warn('Welcome modal not found');
+            return;
         }
-    }
 
-    function showModal() {
-        if (modal) {
-            modal.style.display = 'flex';
-            setTimeout(function () {
+        function closeModal(e) {
+            if (e) e.preventDefault();
+            if (e) e.stopPropagation();
+            if (modal) {
+                modalClosed = true;
+                modal.classList.add('welcome-modal--hidden');
+                modal.setAttribute('data-closed', 'true');
+                setTimeout(function () {
+                    modal.classList.add('welcome-modal--closed');
+                    modal.style.display = 'none';
+                }, 400);
+            }
+        }
+
+        function showModal() {
+            if (modal && !modalClosed) {
+                modal.removeAttribute('data-closed');
+                modal.classList.remove('welcome-modal--closed');
+                modal.style.display = 'flex';
+                modal.style.opacity = '1';
+                modal.style.visibility = 'visible';
                 modal.classList.remove('welcome-modal--hidden');
-            }, 10);
+            }
         }
-    }
 
-    if (closeBtn) {
-        closeBtn.addEventListener('click', closeModal);
-    }
+        if (closeBtn) {
+            closeBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                closeModal(e);
+            });
+        }
 
-    if (welcomeBtn) {
-        welcomeBtn.addEventListener('click', closeModal);
-    }
+        if (welcomeBtn) {
+            welcomeBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                closeModal(e);
+            });
+        }
 
-    if (modal) {
-        modal.addEventListener('click', function (e) {
-            if (e.target === modal || e.target.classList.contains('welcome-modal-overlay')) {
+        if (modal) {
+            var overlay = modal.querySelector('.welcome-modal-overlay');
+            if (overlay) {
+                overlay.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    closeModal(e);
+                });
+            }
+            modal.addEventListener('click', function (e) {
+                if (e.target === modal) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    closeModal(e);
+                }
+            });
+        }
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && modal && !modal.classList.contains('welcome-modal--hidden')) {
                 closeModal();
             }
         });
+
+        showModal();
     }
 
-    document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape' && modal && !modal.classList.contains('welcome-modal--hidden')) {
-            closeModal();
-        }
-    });
-
-    showModal();
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initWelcomeModal);
+    } else {
+        initWelcomeModal();
+    }
 })();
