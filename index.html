@@ -152,8 +152,8 @@
             </div>
         </footer>
 
-        <!-- Welcome Popup Modal -->
-        <div class="welcome-modal" id="welcomeModal">
+        <!-- Welcome Popup Modal (inline style ensures visibility on GitHub Pages) -->
+        <div class="welcome-modal" id="welcomeModal" style="display:flex;opacity:1;visibility:visible;">
             <div class="welcome-modal-overlay"></div>
             <div class="welcome-hearts">
                 <span class="heart">💖</span>
@@ -186,27 +186,45 @@
     <script src="js/player.js"></script>
     <script src="js/welcome.js"></script>
     <script>
-        // Fallback: show modal once on load (never reopen if closed)
+        // Welcome modal: show on load + close handlers (works on GitHub Pages even if welcome.js fails)
         (function() {
-            function ensureModalVisible() {
-                var modal = document.getElementById('welcomeModal');
-                if (!modal || modal.hasAttribute('data-closed') || modal.classList.contains('welcome-modal--closed')) return;
+            var modal = document.getElementById('welcomeModal');
+            var closeBtn = document.getElementById('closeWelcomeModal');
+            var welcomeBtn = document.getElementById('welcomeBtn');
+
+            function closeWelcome() {
+                if (!modal) return;
+                modal.classList.add('welcome-modal--hidden');
+                modal.setAttribute('data-closed', 'true');
+                setTimeout(function() {
+                    modal.classList.add('welcome-modal--closed');
+                    modal.style.display = 'none';
+                }, 400);
+            }
+
+            function initWelcome() {
+                if (!modal) return;
                 modal.classList.remove('welcome-modal--closed');
                 modal.style.display = 'flex';
                 modal.style.opacity = '1';
                 modal.style.visibility = 'visible';
                 modal.classList.remove('welcome-modal--hidden');
+                if (closeBtn) closeBtn.onclick = closeWelcome;
+                if (welcomeBtn) welcomeBtn.onclick = closeWelcome;
+                var overlay = modal.querySelector('.welcome-modal-overlay');
+                if (overlay) overlay.onclick = closeWelcome;
+                modal.onclick = function(e) {
+                    if (e.target === modal) closeWelcome();
+                };
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape' && modal && !modal.classList.contains('welcome-modal--closed')) closeWelcome();
+                });
             }
-            var done = false;
-            function runOnce() {
-                if (done) return;
-                done = true;
-                setTimeout(ensureModalVisible, 150);
-            }
-            if (document.readyState === 'complete') runOnce();
-            else {
-                window.addEventListener('load', runOnce);
-                document.addEventListener('DOMContentLoaded', runOnce);
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initWelcome);
+            } else {
+                initWelcome();
             }
         })();
     </script>
