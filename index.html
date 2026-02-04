@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify – Music for everyone</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="app">
+        <!-- Top navigation -->
+        <header class="top-nav">
+            <div class="nav-left">
+                <button type="button" class="nav-arrow nav-arrow--back" aria-label="Back"></button>
+                <button type="button" class="nav-arrow nav-arrow--forward" disabled aria-label="Forward"></button>
+                <div class="search-wrap">
+                    <input type="search" class="search-input" id="searchInput" placeholder="What do you want to play?" aria-label="Search" autocomplete="off">
+                    <span class="search-shortcut">Ctrl K</span>
+                </div>
+                <button type="button" class="nav-icon-btn" aria-label="Your Episodes">
+                    <span class="icon-folder"></span>
+                </button>
+            </div>
+            <div class="nav-right">
+                <a href="#" class="nav-link">Premium</a>
+                <a href="#" class="nav-link">Support</a>
+                <a href="#" class="nav-link">Download</a>
+                <button type="button" class="install-btn">
+                    <span class="icon-download"></span>
+                    <span class="install-btn-text">Install App</span>
+                </button>
+                <a href="#" class="nav-link">Sign up</a>
+                <a href="#" class="btn-login">Log in</a>
+            </div>
+        </header>
+
+        <div class="layout">
+            <!-- Left sidebar -->
+            <aside class="sidebar">
+                <div class="sidebar-header">
+                    <h2 class="sidebar-title">Your Library</h2>
+                    <button type="button" class="btn-add" aria-label="Add"></button>
+                </div>
+                <div class="playlist-card">
+                    <h3 class="playlist-card-title">Create your first playlist</h3>
+                    <p class="playlist-card-desc">It's easy, we'll help you</p>
+                    <button type="button" class="btn-create">Create playlist</button>
+                </div>
+                <div class="sidebar-footer">
+                    <a href="#">Legal</a>
+                    <a href="#">Safety & Privacy Center</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Cookies</a>
+                    <a href="#">About Ads</a>
+                    <a href="#">Accessibility</a>
+<button type="button" class="lang-btn">
+                            <span class="icon-globe"></span>
+                            <span class="lang-btn-text">English</span>
+                        </button>
+                </div>
+            </aside>
+
+            <!-- Main content -->
+            <main class="main-content">
+                <section class="content-section">
+                    <div class="section-header">
+                        <h2 class="section-title">Trending songs</h2>
+                        <a href="#" class="section-link">Show all</a>
+                    </div>
+                    <div class="card-row card-row--songs" id="songCardsRow">
+                        <article class="song-card" data-audio="audio/ankkhon.ogg">
+                            <img class="song-card-img" src="images/ankhonsebatana.png" alt="Ankhon Se Batana">
+                            <h3 class="song-card-title">Ankhon Se Batana</h3>
+                            <p class="song-card-artist">Sanath</p>
+                        </article>
+                        <article class="song-card" data-audio="audio/kina-chir.ogg">
+                            <img class="song-card-img" src="images/kina-chir.jpg" alt="Kina Chir">
+                            <h3 class="song-card-title">Kina Chir</h3>
+                            <p class="song-card-artist">Sanath</p>
+                        </article>
+                        <article class="song-card" data-audio="audio/dooron.ogg">
+                            <img class="song-card-img" src="images/dooron.jpg" alt="Dorron Dorron">
+                            <h3 class="song-card-title">Dooron Dooron</h3>
+                            <p class="song-card-artist">Sanath</p>
+                        </article>
+                        <article class="song-card" data-audio="audio/ehsaas.mp3">
+                            <img class="song-card-img" src="images/ehsaas.jpg" alt="Ehsas">
+                            <h3 class="song-card-title">Ehsaas</h3>
+                            <p class="song-card-artist">Sanath</p>
+                        </article>
+                        <article class="song-card" data-audio="audio/tu_zaroori.ogg">
+                            <img class="song-card-img" src="images/tu_zaroori.jpg" alt="Tu Zarrori">
+                            <h3 class="song-card-title">Tu Zaroori</h3>
+                            <p class="song-card-artist">Sanath</p>
+                        </article>
+                        <article class="song-card" data-audio="audio/heer.ogg">
+                            <img class="song-card-img" src="images/heer.jpg" alt="Tu Zarrori">
+                            <h3 class="song-card-title">Heer</h3>
+                            <p class="song-card-artist">Sanath</p>
+                        </article>
+                    </div>
+                    <p class="search-no-results" id="searchNoResults" aria-live="polite" hidden>No songs match your search.</p>
+                </section>
+            </main>
+        </div>
+
+        <!-- Logo in top-left corner (overlay) -->
+        <div class="logo-wrap">
+            <a href="#" class="logo" aria-label="Spotify home">
+                <span class="logo-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+                    </svg>
+                </span>
+                <span class="logo-text">Spotify</span>
+            </a>
+        </div>
+
+        <!-- Music player footer (fixed bottom) -->
+        <footer class="player-footer" id="playerFooter" aria-hidden="true">
+            <audio id="playerAudio" preload="metadata"></audio>
+            <div class="player-bar">
+                <div class="player-left">
+                    <img class="player-cover" id="playerCover" src="" alt="">
+                    <div class="player-info">
+                        <span class="player-title" id="playerTitle">—</span>
+                        <span class="player-artist" id="playerArtist">—</span>
+                    </div>
+                </div>
+                <div class="player-center">
+                    <div class="player-controls">
+                        <button type="button" class="player-btn player-btn--icon" id="btnShuffle" aria-label="Shuffle"><span class="icon-shuffle" aria-hidden="true"></span></button>
+                        <button type="button" class="player-btn player-btn--icon" id="btnPrev" aria-label="Previous"><span class="icon-prev" aria-hidden="true"></span></button>
+                        <button type="button" class="player-btn player-btn--play" id="btnPlay" aria-label="Play"><span class="icon-play" aria-hidden="true"></span><span class="icon-pause" aria-hidden="true"></span></button>
+                        <button type="button" class="player-btn player-btn--icon" id="btnNext" aria-label="Next"><span class="icon-next" aria-hidden="true"></span></button>
+                        <button type="button" class="player-btn player-btn--icon" id="btnRepeat" aria-label="Repeat"><span class="icon-repeat" aria-hidden="true"></span></button>
+                    </div>
+                    <div class="player-progress-wrap">
+                        <span class="player-time" id="playerTimeCurrent">0:00</span>
+                        <input type="range" class="player-progress" id="playerProgress" min="0" max="100" value="0" aria-label="Seek">
+                        <span class="player-time" id="playerTimeTotal">0:00</span>
+                    </div>
+                </div>
+                <div class="player-right">
+                    <button type="button" class="player-btn player-btn--icon" aria-label="Queue"><span class="icon-queue" aria-hidden="true"></span></button>
+                    <button type="button" class="player-btn player-btn--icon" aria-label="Devices"><span class="icon-device" aria-hidden="true"></span></button>
+                    <div class="player-volume-wrap">
+                        <button type="button" class="player-btn player-btn--icon player-btn--volume" aria-label="Volume"><span class="icon-volume" aria-hidden="true"></span></button>
+                        <input type="range" class="player-volume" id="playerVolume" min="0" max="100" value="80" aria-label="Volume">
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="js/player.js"></script>
+</body>
+</html>
